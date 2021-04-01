@@ -14,8 +14,9 @@ def dogeCoinFunction():
 
     api = tweepy.API(auth)
 
+    time.sleep(2)
+
     tweetL = api.user_timeline(screen_name='elonmusk', tweet_mode="extended", exclude_replies=True)
-    time.sleep(1)
     lastTweet = tweetL[0].full_text
     
     words = ['dogecoin', 'Dogecoin', 'DOGECOIN', 'DOGE', 'doge', 'DOG', 'dog']
@@ -24,7 +25,4 @@ def dogeCoinFunction():
         if words[i] in lastTweet:
             return True
     
-    return False    
-
-print(dogeCoinFunction())
-    
+    return False  
