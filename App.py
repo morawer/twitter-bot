@@ -1,6 +1,4 @@
-import time
-import requests
-import tweepy, os, json
+import tweepy, os
 
 def dogeCoinFunction():
 
@@ -14,15 +12,17 @@ def dogeCoinFunction():
 
     api = tweepy.API(auth)
 
-    time.sleep(2)
+    tweets = api.user_timeline(screen_name='elonmusk', tweet_mode="extended", exclude_replies=True)
 
-    tweetL = api.user_timeline(screen_name='elonmusk', tweet_mode="extended", exclude_replies=True)
-    lastTweet = tweetL[0].full_text
+    if tweets:
+        lastTweet = tweets[0].full_text
+        lastTweet = lastTweet.lower()
+        print(lastTweet)
     
-    words = ['dogecoin', 'Dogecoin', 'DOGECOIN', 'DOGE', 'doge', 'DOG', 'dog']
+        words = ['dogecoin', 'doge', 'dog']
 
-    for i in range(len(words)):
-        if words[i] in lastTweet:
-            return True
-    
-    return False  
+        for i in range(len(words)):
+            if words[i] in lastTweet:
+                return True
+
+    return False
